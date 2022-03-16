@@ -1,0 +1,281 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+
+/*la barre li tji fiha les onglets */
+
+.navigation {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: #00561b;
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+
+/*hna hna nsegdo le ul wahowa ga3 hadik la partie li fiha tableau de bord ....*/
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+/* whna hna machyen nsegdo dok les champs*/
+
+.navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+}
+
+
+/*hadi ta3 la liste champ li nekhtaroh yetbedel fel couleur */
+
+.navigation ul li:hover {
+    background: #011608;
+}
+
+
+/*hadi ta3 champ lewel bach mayesrach fih dak effet */
+
+.navigation ul li:nth-child(1):hover {
+    margin-bottom: 20px;
+}
+
+.navigation ul li:nth-child(1):hover {
+    background: transparent;
+}
+
+
+/*hada bach negel3o dil la couleur ta3 les liens li par defaut */
+
+.navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: blanchedalmond;
+}
+
+
+/* les icons */
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.navigation ul li a .icon .bi {
+    color: #fff;
+    font-size: 25px;
+}
+
+
+/*les titre li jayen gedam icon*/
+
+.navigation ul li a .titre {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+}
+
+
+/* le milieu wsm ndiro f lwest*/
+
+.milieu {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: #f5f5f5;
+    transition: 0.5s;
+}
+
+.milieu .topbar {
+    width: 100%;
+    background: #fff;
+    height: 60px;
+    padding: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.toggle .bi {
+    /*content: "\F479";
+    font-family: fontawesome;*/
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    font-size: 25px;
+    text-align: center;
+    color: #111;
+}
+
+
+/*bach ki na3afso f boutton tetmaska la navigatin */
+
+.navigation.active {
+    width: 60px;
+}
+
+.milieu.active {
+    width: calc(100% - 60px);
+    left: 60px;
+}
+
+
+/*pour la barre de recherche */
+
+.search {
+    position: relative;
+    width: 400px;
+    margin: 0px 10px;
+}
+
+.search label {
+    position: relative;
+    width: 100%;
+}
+
+.search label input {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 20px;
+    padding-left: 40px;
+    outline: none;
+}
+
+
+/*icon search ndekhloha f la recherche*/
+
+.search label .bi {
+    position: absolute;
+    left: 15px;
+    top: 3.75px;
+}
+
+
+/* pour l'image */
+
+.user {
+    position: relative;
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.user img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /*hadii bach image ki nseghrouha matwelich flouuuuuu*/
+    object-fit: cover;
+}
+
+
+/*hna rana nekherbo b l cadre lekbir*/
+
+.cadrebox {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+
+/*w hna hna nekherb f les cadres sghare comme ta3 prof ..num de vue....*/
+
+.cadrebox .cadre {
+    position: relative;
+    background: #d0f5dc;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.cadrebox .cadre .num {
+    position: relative;
+    font-size: 2em;
+    font-weight: 500;
+}
+
+.cadrebox .cadre .cadreNum {
+    color: #525a55;
+}
+
+.cadrebox .cadre .iconVue {
+    font-size: 2.55em;
+    color: #011608;
+}
+
+.details {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+
+/*hna hna nekhedmo responsive*/
+
+@media (max-width: 1100px) {
+    .navigation {
+        left: -300 px;
+    }
+    .navigation.active {
+        left: 15px;
+    }
+    .milieu {
+        width: 100%;
+        left: 0;
+    }
+    .milieu.active {
+        width: calc(100% - 300px);
+        left: 300px;
+    }
+    .cadrebox {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
