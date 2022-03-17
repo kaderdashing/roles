@@ -17,6 +17,7 @@ class isdoyenmiddleware
      */
     public function handle(Request $request, Closure $next)
     {   if((Auth::check()) && (Auth::user()->role == 1  )){
+
         return $next($request); }
         else {
             return redirect()->route('home') ;

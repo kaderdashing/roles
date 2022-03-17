@@ -51,6 +51,10 @@ body {
     background: #011608;
 }
 
+.navbar-brand :hover {
+    color: #00561b;
+}
+
 
 /*hadi ta3 champ lewel bach mayesrach fih dak effet */
 
@@ -255,6 +259,11 @@ body {
     width: 100%;
     padding: 20px;
     text-align: center;
+}
+
+.a.active {
+    background: #6ca8a3;
+    color: #f5f5f5
 }
 
 

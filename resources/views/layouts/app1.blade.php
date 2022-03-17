@@ -28,7 +28,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="">
     <div class="navigation">
       <ul>
         <li><a href="#">
@@ -40,7 +40,7 @@
         </li>
         <br>
         <li>
-          <a href="#">
+          <a href="{{ url('/home') }}">
             <span class="icon"><i class="bi bi-speedometer2"></i></i></span>
             <span class="titre"><b>tableau de bord</b></span>
           </a>
@@ -63,9 +63,17 @@
         </li>
         <br>
         <li>
-          <a href="#">
+
+          <a href="{{ route('logout') }}"               onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();">
             <span class="icon"><i class="bi bi-box-arrow-left"></i></span>
             <span class="titre"><b>déconnecter</b></span>
+          </a>
+
+           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+               @csrf
+           </form>
+            </span>
           </a>
         </li>
         <br>
@@ -126,6 +134,16 @@
       navigation.classList.toggle('active');
       milieu.classList.toggle('active');
     }
+    const currentLocation = location.href ;
+    const menuItem = document.querySelectorAll('a') ; 
+    const menuLenght = menuItem.length 
+    for(let i = 0 ; i<menuLenght ; i++) {
+      if(menuItem[i].href===currentLocation){
+        menuItem[i].className="active"
+      }
+    }
+
+
   </script>
   <style>
     * {
@@ -157,8 +175,8 @@
     .navigation ul {
       position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
+      left: -30px;
+      width: 80%;
     }
 
     /* whna hna machyen nsegdo dok les champs*/
@@ -171,6 +189,11 @@
     /*hadi ta3 la liste champ li nekhtaroh yetbedel fel couleur */
     .navigation ul li:hover {
       background: #011608;
+    }
+
+    a.active {
+      background: #202e2d;
+      color: #f5f5f5
     }
 
     /*hadi ta3 champ lewel bach mayesrach fih dak effet */

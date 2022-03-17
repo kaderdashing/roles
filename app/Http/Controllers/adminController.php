@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class adminController extends Controller
 {
- /*   public function __construct()
+  public function __construct()
     {
-        $this->middleware['auth'];
-
+        $this->middleware('isadmin');
         
-    }*/
+    } 
+    
     function test() {
-        return view('dashbord.admin.test');
+      //  if((Auth::user()->role == 2)){
+        return view('dashbord.admin.test');//}
+      
+          
     }
     function rien() {
-        return view('dashbord.admin.rien');
-    }
-}
+       // if((Auth::user()->role == 2)){
+        return view('dashbord.admin.rien');//}
+    } }

@@ -28,28 +28,23 @@ Route::get('/', function () {
 Route::group(['middleware' => 'prevent-back-history'],function(){
     Auth::routes();
 
-//Auth::routes();
 
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+         
 
-
-
-
-
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::group(['prefix'=>'doyen','Middleware'=>['isdoyen','preventBackHistory']],function(){
-Route::get('settings', [doyenController::class,'settings'])->name('doyen.settings') ;
-Route::get('creer', [doyenController::class,'creer'])->name('doyen.creer') ;
-});
-
-Route::group(['prefix'=>'admin','Middleware'=>['isadmin','preventBackHistory']],function(){
-    Route::get('test', [adminController::class,'test'])->name('admin.test') ;
-    Route::get('rien', [adminController::class,'rien'])->name('admin.rien') ;
-    });
+        Route::group(['prefix'=>'doyen','middleware'=>['isdoyen']],function(){
+        Route::get('settings', [doyenController::class,'settings'])->name('doyen.settings') ;
+        Route::get('creer', [doyenController::class,'creer'])->name('doyen.creer') ;
+})  ; 
+    Route::group(['prefix'=>'admin','Middleware'=>['isadmin']],function(){
+        Route::get('test', [adminController::class,'test'])->name('admin.test') ;
+        Route::get('rien', [adminController::class,'rien'])->name('admin.rien') ;
+    }); 
     
 });
+
+
+
     //->middleware(['auth', 'isadmin']) ;
 /*
 Route::group(['prefix'=>'enseignant','Middleware'=>'auth'],function(){
