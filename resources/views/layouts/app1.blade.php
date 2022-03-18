@@ -47,10 +47,10 @@
         </li>
         <br>
         <li>
-          <a href="#">
+          <a href="{{ url('/admin/dashbord/membre') }}">
             <span class="icon"><i class="bi bi-person"></i>
             </span>
-            <span class="titre"><b>enseignant</b></span>
+            <span class="titre"><b>Membre</b></span>
           </a>
         </li>
         <br>

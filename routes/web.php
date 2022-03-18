@@ -5,6 +5,7 @@ use App\Http\Controllers\adminController ;
 use App\Http\Controllers\doyenController ;
 use App\Http\Controllers\enseignantController ;
 use App\Http\Controllers\etudiantController ;
+use App\Http\Controllers\admin\UsersController ;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Auth ;
@@ -24,7 +25,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::namespace('')->prefix('admin')->name('admin.')->group(function(){
+    Route::resource('/dashbord/membre', UsersController::class)  ;
 
+}) ;
 Route::group(['middleware' => 'prevent-back-history'],function(){
     Auth::routes();
 
