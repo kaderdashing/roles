@@ -90,10 +90,30 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
+    
+    
+    public function update(Request $request, $id)
+{ //dd($id) ;
+        $validatedData = $request->validate([
+            'role' => 'required' ,
+            'name' => 'required|max:255',
+            
+        ]);
+        User::whereId($id)->update($validatedData);
+
+        return redirect('/admin/dashbord/membre')->with('success', 'le user a bien eté modifier');
+}
+
+
+
+     /*
     public function update(Request $request, User $user)
     {
         //
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
