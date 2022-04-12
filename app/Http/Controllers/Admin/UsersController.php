@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
@@ -17,8 +18,12 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all() ;
+        
+
+        $users = User::all() ; //->paginate(10)
+        
         return view('dashbord.membre')->with('users',$users) ;
+
     }
 
     /**
@@ -61,12 +66,14 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+      if( Gate::allows('destroye-edit') ) {
         // get the shark
         $user = user::find($id);
         
         // show the edit form and pass the user
         return view('dashbord.edit')
-            ->with('user', $user);
+            ->with('user', $user);}
+        else return Redirect::to('admin/dashbord/membre') ;
     }
 
 
@@ -90,7 +97,11 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    
+    public function __construct()
+    {
+        $this->middleware('auth');
+        
+    } 
     
     public function update(Request $request, $id)
 { //dd($id) ;
@@ -106,11 +117,6 @@ class UsersController extends Controller
 
 
 
-     /*
-    public function update(Request $request, User $user)
-    {
-        //
-    }
 
 
 
@@ -122,7 +128,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   if( Gate::allows('destroye-edit') ) {
         // delete
         $user = user::find($id);
         $user->delete();
@@ -130,6 +136,7 @@ class UsersController extends Controller
         // redirect
        // Session::flash('message', 'Successfully deleted the user!');
         return Redirect::to('admin/dashbord/membre')->with('info','l utilisateur a bien eté suprimé');
-    }
+      }
+    else return Redirect::to('admin/dashbord/membre') ;}
 
 }

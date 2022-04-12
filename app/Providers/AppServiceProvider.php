@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,7 +24,10 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-        //
+    {   //fonction qui permet seulement au doyen de modifier et suprimer une personne 
+        Gate::define('destroye-edit',function (User $user){
+            return $user->isdoyen($user);
+
+        }) ;
     }
 }

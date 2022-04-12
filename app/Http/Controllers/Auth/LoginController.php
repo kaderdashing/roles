@@ -56,6 +56,10 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
+
+
+        /* la fonction marche si le input est corecte elle va verifier juste le role */ 
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
             if(auth()->user()->role == 1) {
                 return redirect()->route('doyen.settings') ; //home
@@ -64,10 +68,18 @@ class LoginController extends Controller
             elseif(auth()->user()->role == 2) {
                 return redirect()->route('admin.test') ;
             }
-            else {
-                return redirect()->route('Login')->with('error','Email and password are wrong etes vous sur de ne pas avoir oublié ?') ;
-            }
+           
+           
 
         }
+        // ici on va faire le redirectionement en cas de faux email ou faux password on va pas montrer l'erreure pour une personne mal intpntioné 
+    //    return redirect()->route('login') ; la fonction simple fourni par laravel
+    return back()->withErrors([
+        'email' => 'email faux ',
+        'password' => 'password faux ',
+
+    ]);
+
+
     }
 }

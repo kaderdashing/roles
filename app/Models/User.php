@@ -42,4 +42,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function isdoyen(User $user){
+        //fonction qui verifie que tu est un doyen 
+        if ($user->role==1)
+        return true ;
+        else 
+        return false ;
+    }
 }

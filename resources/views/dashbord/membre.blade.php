@@ -25,7 +25,7 @@
                     <th scope="col">role</th>
                     <th scope="col">NOM</th>
                     <th scope="col">email</th>
-                    <th scope="col">action</th>
+                    @can('destroye-edit')  <th scope="col">action</th> @endcan
                   </tr>
                 </thead>
                 <tbody> 
@@ -52,14 +52,17 @@
                       <td>  {{$user->email}} </td>
                        
                       <td>
+                        @can('destroye-edit')
                         <a href="{{route('admin.membre.edit',$user->id) }}" > <button class="btn btn-primary"> editer</button></a>
+                       @endcan
+                       @can('destroye-edit')
                         <form action="{{route('admin.membre.destroy',$user->id) }}" method="post" class="d-inline">
                           @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-warning ">suprimer</button>
                         
                         </form>
-
+                        @endcan
 
                       </td>
                     </tr>
