@@ -3,9 +3,7 @@
 
 
 <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        liste des utilisateur
-    </h2>
+    
 </x-slot>
 
 <div class="container">
@@ -16,6 +14,8 @@
     @endif
 
 <div class="py-12">
+  <h1>liste des admin</h1>
+
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
@@ -36,7 +36,7 @@
                     <td>  
                      @if (($user->role))
                         @if (($user->role)==1)
-                        <p>doyen</p>
+                        <p>admin</p>
                         @endif
                         
                         @if (($user->role)==2)
@@ -70,10 +70,26 @@
                     
         
                 </tbody> </table> 
+                <a href="{{route('Enseignant.create') }}" > <button class="btn btn-primary"> enseignant controller</button></a>
         </div>
     </div>
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </div>

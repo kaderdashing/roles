@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Enseignant;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
@@ -21,8 +22,12 @@ class UsersController extends Controller
         
 
         $users = User::all() ; //->paginate(10)
-        
-        return view('dashbord.membre')->with('users',$users) ;
+       // dd($enseignants) ;
+        return view('dashbord.membre')->with([
+            'users'=>$users,
+            
+        ]) ;
+
 
     }
 
@@ -33,7 +38,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -112,7 +117,7 @@ class UsersController extends Controller
         ]);
         User::whereId($id)->update($validatedData);
 
-        return redirect('/admin/dashbord/membre')->with('success', 'le user a bien eté modifier');
+        return redirect('/admin/dashbord/membre')->with('info',' utilisateur a bien eté edité');;
 }
 
 

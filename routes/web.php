@@ -25,11 +25,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::resource('Etudiant', 'App\Http\Controllers\EtudiantController');
+Route::resource('Enseignant', 'App\Http\Controllers\EnseignantController');
+
+
 Route::group(['middleware' => 'prevent-back-history'],function(){
     Auth::routes();
     
     Route::namespace('')->prefix('admin')->name('admin.')->group(function(){
         Route::resource('/dashbord/membre', UsersController::class)  ;
+        Route::resource('/dashbord/enseignant', EnseignantController::class)  ;
+
     
     }) ;
 

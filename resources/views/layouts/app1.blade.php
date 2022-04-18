@@ -50,15 +50,15 @@
           <a href="{{ url('/admin/dashbord/membre') }}">
             <span class="icon"><i class="bi bi-person"></i>
             </span>
-            <span class="titre"><b>Membre</b></span>
+            <span class="titre"><b>liste admin</b></span>
           </a>
         </li>
         <br>
         <li>
-          <a href="#">
-            <span class="icon"><i class="bi bi-person-lines-fill"></i>
+          <a href="{{ url('/admin/dashbord/enseignant') }}">
+            <span class="icon"><i class="bi bi-person"></i>
             </span>
-            <b></b> <span class="titre"><b>liste des etudiants</b></span>
+            <span class="titre"><b>liste enseignant</b></span>
           </a>
         </li>
         <br>
