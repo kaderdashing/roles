@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -23,21 +24,31 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+ 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('dashboard');
+        }
+ 
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
+    }
+
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-    protected function redirectTo()
-    {
-        if (Auth()->user()->role == 1) {
-            return route('doyen.settings');
-        } elseif (Auth()->user()->role == 2) {
-
-            return route('admin.test');
-        }
-    }
 
     /**
      * Create a new controller instance.
@@ -47,39 +58,29 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('guest:writer')->except('logout');
     }
 
-    public function login(Request $request)
+    public function showWriterLoginForm()
     {
-        $input = $request->all();
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-
-
-        /* la fonction marche si le input est corecte elle va verifier juste le role */ 
-        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
-            if(auth()->user()->role == 1) {
-                return redirect()->route('doyen.settings') ; //home
-            }
-
-            elseif(auth()->user()->role == 2) {
-                return redirect()->route('admin.test') ;
-            }
-           
-           
-
-        }
-        // ici on va faire le redirectionement en cas de faux email ou faux password on va pas montrer l'erreure pour une personne mal intpntioné 
-    //    return redirect()->route('login') ; la fonction simple fourni par laravel
-    return back()->withErrors([
-        'email' => 'email faux ',
-        'password' => 'password faux ',
-
-    ]);
-
-
+        return view('auth.login', ['url' => 'writer']);
     }
+
+    public function writerLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
+        ]) ;
+        //dd($request);
+        
+
+        if (Auth::guards('writer')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+            dd($request);
+            return redirect()->intended('/writer');
+        }
+        return back()->withInput($request->only('email', 'remember'));
+    }
+
+
 }

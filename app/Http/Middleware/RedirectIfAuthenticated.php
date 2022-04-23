@@ -19,21 +19,42 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $guards = empty($guards) ? [null] : $guards;
+        $kader=1;
+        //dd($kader);
 
-        foreach ($guards as $guard) {
+     //   foreach ($guards as $guard) {
           /*  if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
             } */
+          /* if ($guard == "writer" && Auth::guard($guard)->check()) {
+                dd($guard) ;
+                return redirect('/writer');
+            } 
+           /* if ($guard == "writer" && Auth::guard($guard)->check()) {
+                return redirect('/writer');
+            }*/
+          /*  if (Auth::guard($guard)->check()) {
+                return redirect('/home');
+            }*/
 
-            if(Auth::guard($guard)->check() && Auth::user()->role == 1) {
+            
+
+        /*    if(Auth::guard($guard)->check() && Auth::user()->role == 1) {
+                dd($kader) ;
                 return redirect(RouteServiceProvider::HOME);            }
             elseif(Auth::guard($guard)->check() && Auth::user()->role ==2) {
+                dd($kader) ;
                 return redirect(RouteServiceProvider::HOME);             ;
             }
+          //  else dd($kader) ;
     
-        }
+        } */
+        foreach ($guards as $guard) {
+        if(Auth::guard($guard)->check() && Auth::user()) {    return redirect('/welcome');     }
+            elseif ($guard == "writer" && Auth::guard("writer")->check()) {return redirect('/writer');}
+    }
+        
 
         return $next($request);
-    }
+    } 
 }

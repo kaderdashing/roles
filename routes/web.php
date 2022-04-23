@@ -1,14 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\adminController ;
-use App\Http\Controllers\doyenController ;
-use App\Http\Controllers\enseignantController ;
-use App\Http\Controllers\etudiantController ;
-use App\Http\Controllers\admin\UsersController ;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Auth ;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\adminController ;
+use App\Http\Controllers\doyenController ;
+use App\Http\Controllers\etudiantController ;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+//use App\Http\Controllers\Editeur\LoginController;
+use App\Http\Controllers\enseignantController ;
+use App\Http\Controllers\admin\UsersController ;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +27,35 @@ use Illuminate\Support\Facades\Auth ;
 Route::get('/', function () {
     return view('welcome');
 });
+/*--------------------------------------------------------------------------------------------*/
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login/writer', 'showLoginForm');
+    Route::post('/login/writer', 'writerLogin');
+});
+
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/register/writer', 'showWriterRegisterForm');
+    Route::post('/register/writer', 'createWriter');
+});
+/*------------------------------------------------------------------------------------*/
+Route::controller('App\Http\Controllers\Editeur\LoginController')->group(function () {
+Route::get('editeur', 'showLoginForm')->name('editeur.login');
+Route::post('editeur', 'login');
+});
+/* -------------------------------------------------------------------------------*/
+Route::controller('App\Http\Controllers\EditeurController')->group(function () {
+    Route::get('editeur/home', 'index') ;
+});
+
+
+
+/* -------------------------------------------------------------------------------*/
+//Route::get('/login/writer', 'App\Http\Controllers\Auth\LoginController::showLoginForm()');
+//Route::get('/register/writer', 'App\Http\Controllers\Auth\RegisterController::showWriterRegisterForm');
+//Route::post('/login/writer', 'App\Http\Controllers\Auth\LoginController::writerLogin()');
+//Route::post('/register/writer', 'App\Http\Controllers\Auth\RegisterController@createWriter');
+Route::view('/writer', 'writer');
+/* -------------------------------------------------------------------------------*/
 
 
 Route::resource('Etudiant', 'App\Http\Controllers\EtudiantController');
@@ -78,3 +110,7 @@ Route::middleware(['auth', 'isdoyen'])->group(function () {
   
    
 }); */
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

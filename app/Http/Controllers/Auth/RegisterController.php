@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\Writer;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
+//use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     /*
@@ -39,7 +41,27 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:writer');
     }
+
+    public function showWriterRegisterForm()
+    {
+        return view('auth.register', ['url' => 'writer']);
+    }
+
+
+    protected function createWriter(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        $writer = Writer::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
+        //dd($writer) ;
+        return redirect()->intended('/writer');
+    }
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -67,7 +89,6 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'role'=>1,
             'password' => Hash::make($data['password']),
         ]);
     }

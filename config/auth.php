@@ -40,6 +40,24 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'writer' => [
+            'driver' => 'session',
+            'provider' => 'writers',
+        ],
+
+        'editeur' => [
+            'driver' => 'session',
+            'provider' => 'editeurs',
+        ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+            
+        
+
     ],
 
     /*
@@ -63,6 +81,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'writers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Writer::class,
+        ],
+        'editeurs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Editeur::class,
         ],
 
         // 'users' => [
@@ -89,6 +115,18 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'writers' => [
+            'provider' => 'writers',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'editeurs' => [
+            'provider' => 'editeurs',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
