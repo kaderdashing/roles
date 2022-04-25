@@ -62,6 +62,17 @@
           </a>
         </li>
         <br>
+
+        <a href="{{ url('/editeur/home') }}">
+          <span class="icon"><i class="bi bi-person"></i>
+          </span>
+          <span class="titre"><b>liste editeur</b></span>
+        </a>
+      </li>
+      <br>
+
+
+
         <li>
 
           <a href="{{ route('logout') }}"               onclick="event.preventDefault();
@@ -69,6 +80,9 @@
             <span class="icon"><i class="bi bi-box-arrow-left"></i></span>
             <span class="titre"><b>déconnecter</b></span>
           </a>
+
+
+
 
            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                @csrf

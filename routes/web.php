@@ -46,6 +46,7 @@ Route::post('editeur', 'login');
 Route::controller('App\Http\Controllers\EditeurController')->group(function () {
     Route::get('editeur/home', 'index') ;
 });
+Route::resource('Editeur', 'App\Http\Controllers\EditeurController');
 
 
 
@@ -54,7 +55,7 @@ Route::controller('App\Http\Controllers\EditeurController')->group(function () {
 //Route::get('/register/writer', 'App\Http\Controllers\Auth\RegisterController::showWriterRegisterForm');
 //Route::post('/login/writer', 'App\Http\Controllers\Auth\LoginController::writerLogin()');
 //Route::post('/register/writer', 'App\Http\Controllers\Auth\RegisterController@createWriter');
-Route::view('/writer', 'writer');
+//Route::view('/writer', 'writer');
 /* -------------------------------------------------------------------------------*/
 
 
