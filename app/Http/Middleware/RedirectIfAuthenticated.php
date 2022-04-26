@@ -19,7 +19,6 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $kader=1;
         //dd($kader);
 
      //   foreach ($guards as $guard) {

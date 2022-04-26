@@ -127,7 +127,7 @@ class EnseignantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { //dd($id) ;
+    { 
             $validatedData = $request->validate([
                 'nom' => 'required' ,
                 'prenom' => 'required|max:255',

@@ -49,7 +49,6 @@
                                                    </td>
                                                 </tr>
                                                     
-                                            
                                                     
                             
                                             @endforeach
@@ -59,6 +58,10 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
+    <div class="container mt-3 aligne-center">     <a href="{{route('Editeur.create') }}" > <button class="btn btn-primary"> cree editeur</button></a>
+    </div>
+
     @endsection

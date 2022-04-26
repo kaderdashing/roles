@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Editeur;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class EditeurController extends Controller
 {
@@ -50,19 +53,40 @@ class EditeurController extends Controller
      */
    
         public function store(Request $request)
-        {
-            $this->validate($request, [
-                'name' => 'required',
-                'password' => 'required',
-                'email' => 'required|email',
+        {   $this->validator($request->all())->validate();
+            $editeur = Editeur::create([
+            
+                'name' => $request['name'],
+                'password' => Hash::make($request['password']),
+                'email' => $request['email'],
+                'email_verified_at' => now(),
+                'remember_token' => Str::random(10),
+
             ]);
     
             $input = $request->all();
+           // dd($input) ;
+
+            //Editeur::create($input);
+            //dd($input) ;
     
-            Editeur::create($input);
-    
-            return redirect()->route('editeur/home');
+            return redirect()->route('Editeur.index');
         }
+
+            /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
+    }
 
     /**
      * Display the specified resource.

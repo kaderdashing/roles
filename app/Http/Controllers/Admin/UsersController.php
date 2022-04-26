@@ -83,17 +83,7 @@ class UsersController extends Controller
 
 
 
-/*
 
-    public function edit(User $user)
-    {  
-        dd($user) ;
-        return view('dashbord.edit', [
-            'user' =>$user
-        ]
-        
-        ) ;
-    } */
 
     /**
      * Update the specified resource in storage.
