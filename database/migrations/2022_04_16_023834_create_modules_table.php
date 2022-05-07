@@ -15,6 +15,18 @@ class CreateModulesTable extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
+
+            $table->string('libelle');
+            $table->boolean('controle');
+            $table->boolean('examen');
+            $table->boolean('tp');
+
+            $table->string('option');
+            $table->integer('semestre');
+            
+
+
+
             $table->timestamps();
         });
     }

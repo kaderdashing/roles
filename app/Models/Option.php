@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Option extends Model
 {
     use HasFactory;
+    protected $fillable = ["libelle","niveau", "created_at", "updated_at"];
+
 }
