@@ -31,7 +31,13 @@
         <dt>Email</dt>
         <dd>{{$editeur->email}}</dd>
     </dl>
-
+<hr>
+@forelse ($editeur->modules as $module)
+    <span>les modules sont: {{$module->libelle}} </span>
+   
+@empty
+    <h1>Aucun module assigner </h1>
+@endforelse
     <div class="d-flex">
         <a href="{{route('Editeur.edit', $editeur->id)}}" class="btn btn-primary m-1">Edit</a>
 
