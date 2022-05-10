@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateEtudiantsTable extends Migration
 {
@@ -20,7 +21,10 @@ class CreateEtudiantsTable extends Migration
             $table->date('date_naissance');
             $table->string('promo');
             $table->string('file_path');
-
+           // $table->foreignId('promotion_id')->constrained();
+            $table->unsignedBigInteger('promotion_id');
+ 
+            $table->foreign('promotion_id')->references('id')->on('promotions')->onDelete('cascade');;
             
             $table->timestamps();
         });
@@ -33,6 +37,8 @@ class CreateEtudiantsTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('etudiants');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

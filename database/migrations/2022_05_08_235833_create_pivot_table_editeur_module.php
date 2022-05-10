@@ -28,6 +28,6 @@ class CreatePivotTableEditeurModule extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pivot_table_editeur_module');
+        Schema::dropIfExists('editeur_module');
     }
 }

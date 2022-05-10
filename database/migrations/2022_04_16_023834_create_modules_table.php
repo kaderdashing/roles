@@ -23,7 +23,7 @@ class CreateModulesTable extends Migration
 
             $table->string('option');
             $table->integer('semestre');
-            
+            $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');            
 
 
 

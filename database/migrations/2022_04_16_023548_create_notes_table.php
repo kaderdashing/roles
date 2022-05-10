@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateNotesTable extends Migration
 {
@@ -19,6 +20,11 @@ class CreateNotesTable extends Migration
             $table->string('etudiant');
             $table->string('type');
             $table->double('note');
+           // $table->foreignId('module_id')->constrained()->onDelete('cascade');
+           $table->unsignedBigInteger('module_id');
+ 
+           $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');;
+           
 
             $table->timestamps();
         });
@@ -31,6 +37,10 @@ class CreateNotesTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+
         Schema::dropIfExists('notes');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+
     }
 }
