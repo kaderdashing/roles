@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Module;
 use App\Models\Promotion;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,12 @@ class Etudiant extends Model
     
     
     public function promotion(){
-        return $this->hasMany(Promotion::class);
+        return $this->belongsTo(Promotion::class);
+
+    }
+
+    public function modules(){
+        return $this->hasMany(Module::class);
 
     }
 }
