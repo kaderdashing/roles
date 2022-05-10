@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Note;
 use App\Models\Module;
 use App\Models\Promotion;
 use Illuminate\Database\Eloquent\Model;
@@ -18,8 +19,13 @@ class Etudiant extends Model
 
     }
 
-    public function modules(){
-        return $this->hasMany(Module::class);
+    public function notes(){
+        return $this->hasMany(Note::class);
 
     }
+
+  /*  public function moduleNotes()
+    {
+        return $this->hasManyThrough(Note::class, Module::class);
+    } */
 }

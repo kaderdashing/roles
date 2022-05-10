@@ -16,7 +16,7 @@ class Module extends Model
 public function editeurs(){
     return $this->belongsToMany(Editeur::class) ;
 }
-
+/*
 public function etudiant(){
     return $this->belongsTo(Etudiant::class);
 
@@ -25,5 +25,9 @@ public function notes(){
     return $this->hasMany(Note::class);
 
 }
+*/
+public function notes(){
+    return $this->hasMany(Note::class);
 
+}
 }

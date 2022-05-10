@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateModulesTable extends Migration
 {
@@ -23,7 +24,7 @@ class CreateModulesTable extends Migration
 
             $table->string('option');
             $table->integer('semestre');
-            $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');            
+           // $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');            
 
 
 
@@ -38,6 +39,10 @@ class CreateModulesTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+
         Schema::dropIfExists('modules');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+
     }
 }

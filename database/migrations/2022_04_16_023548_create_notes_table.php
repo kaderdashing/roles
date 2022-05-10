@@ -16,16 +16,18 @@ class CreateNotesTable extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('module');
-            $table->string('etudiant');
+           // $table->string('module');
+           // $table->string('etudiant');
             $table->string('type');
             $table->double('note');
            // $table->foreignId('module_id')->constrained()->onDelete('cascade');
            $table->unsignedBigInteger('module_id');
- 
-           $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');;
+           $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
            
-
+          /* $table->unsignedBigInteger('etudiant_id');
+           $table->foreign('etudiant_id')->references('id')->on('etudiants')->onDelete('cascade');
+*/
+        $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
