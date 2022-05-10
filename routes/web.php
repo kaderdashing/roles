@@ -4,14 +4,16 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Auth ;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\adminController ;
 use App\Http\Controllers\doyenController ;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\etudiantController ;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 //use App\Http\Controllers\Editeur\LoginController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\enseignantController ;
 use App\Http\Controllers\admin\UsersController ;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,7 @@ use App\Http\Controllers\admin\UsersController ;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::resource('module', ModuleController::class);
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,16 +50,16 @@ Route::controller('App\Http\Controllers\EditeurController')->group(function () {
     Route::get('editeur/home', 'index') ;
 });
 Route::resource('Editeur', 'App\Http\Controllers\EditeurController');
-
-
-
 /* -------------------------------------------------------------------------------*/
-//Route::get('/login/writer', 'App\Http\Controllers\Auth\LoginController::showLoginForm()');
-//Route::get('/register/writer', 'App\Http\Controllers\Auth\RegisterController::showWriterRegisterForm');
-//Route::post('/login/writer', 'App\Http\Controllers\Auth\LoginController::writerLogin()');
-//Route::post('/register/writer', 'App\Http\Controllers\Auth\RegisterController@createWriter');
-//Route::view('/writer', 'writer');
-/* -------------------------------------------------------------------------------*/
+Route::resource('module', ModuleController::class);
+Route::resource('note', NoteController::class);
+
+Route::controller('App\Http\Controllers\ModuleController')->group(function () {
+    Route::get('module/home', 'index') ;
+});
+
+
+
 
 
 Route::resource('Etudiant', 'App\Http\Controllers\EtudiantController');
